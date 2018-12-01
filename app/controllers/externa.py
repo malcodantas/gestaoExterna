@@ -7,12 +7,13 @@ from app.models.forms import ChBox
 @login_required
 def emprestar():
     form=ChBox()
-    print("testando formulario")
     if form.validate_on_submit():
         listaDeEquipamentos =request.form.getlist('listaDeEquipamentos')
+        nomeDeUsuario=request.form.getlist('nomeDeUsuario')
         for id in listaDeEquipamentos:
             equipamento=Equipamento.query.get(id)
             equipamento.status=1
+            equipamento.usuario=nomeDeUsuario[0]
             db.session.add(equipamento)
             db.session.commit()
     equip=Equipamento.query.all()
@@ -33,6 +34,7 @@ def exibir():
 def retornou(ide):
     equip=Equipamento.query.filter_by(id=ide).first()
     equip.status=0
+    equip.usuario=""
     db.session.add(equip)
     db.session.commit()
     Listaequip=Equipamento.query.all()

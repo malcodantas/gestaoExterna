@@ -2,7 +2,7 @@
 {% block content%}
 <div class="container">
     <div class="row">
-        <div class="offser-3 col-md-6 offset-3 jumbotron">
+        <div class="offser-2 col-md-8 offset-2 jumbotron">
             <table class="table jumbotron">
                 <thead class="thead-dark">
                     <tr>
@@ -15,7 +15,7 @@
                     {% if equipamento.status==True %}    
                         <tr>
                             <td width='50%'>{{equipamento.name}}</td>
-                            <td width='25%'> Usuário</td>
+                            <td width='25%'> {{equipamento.usuario}}</td>
                             <td width='25%'><a href="/retornou/{{equipamento.id}}">RETORNOU</a></td>                                
                         </tr>
                     {% endif %}

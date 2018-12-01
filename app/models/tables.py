@@ -19,10 +19,21 @@ class Equipamento(db.Model):
     name=db.Column(db.String(80))
     status=db.Column(db.Boolean)
     descricao=db.Column(db.String(200))
-    def __init__(self,name,status=False,descricao="Item sem descrião"):
+    usuario=db.Column(db.String(80))
+    def __init__(self,name,status=False,descricao="Item sem descrião",usuario=" "):
         self.name=name
         self.status=status
         self.descricao=descricao
+        self.usuario=usuario
     def __repr__(self):
         return self.name
-
+class Funcionario(db.Model):
+    __tablename__="funcionarios"
+    id=db.Column(db.Integer,primary_key=True)
+    name=db.Column(db.String(80))
+    funcao=db.Column(db.String(80))
+    def __init__(self,name,funcao):
+        self.name=name
+        self.funcao=funcao
+    def __repr__(self):
+        return self.name

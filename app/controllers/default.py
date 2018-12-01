@@ -4,6 +4,7 @@ from flask_login import login_user,logout_user,login_required,current_user
 
 from app.models.forms import LoginForm,EquipForm
 from app.models.tables import User,Equipamento
+
 @app.route("/")
 def index():
     return redirect(url_for('login'))
@@ -40,13 +41,34 @@ def cadastrar_equipamento():
         new_equip=Equipamento(form.name.data,False,form.descricao.data)
         db.session.add(new_equip)
         db.session.commit()
-        return "Retornar lista de equipamentos"
+        Listaequip=Equipamento.query.all()
+        return render_template('externa.html',equipamentos=Listaequip)
     return render_template('cadastrar_equipamento.html',formulario=form)
 ################################################
 @app.route("/retirada")
 def emprestar():
-    return "Retirada"
+    equip=Equipamento.query.all()
+    return render_template("retirada.html",equipamentos=equip)
 
 @app.route("/externa")
 def exibir():
-    return render_template('externa.html')
+    Listaequip=Equipamento.query.all()
+    return render_template('externa.html',equipamentos=Listaequip)
+
+@app.route("/retornou/<ide>")
+def retornou(ide):
+    equip=Equipamento.query.filter_by(id=ide).first()
+    equip.status=0
+    db.session.add(equip)
+    db.session.commit()
+    Listaequip=Equipamento.query.all()
+    return render_template('externa.html',equipamentos=Listaequip)
+@app.route("/retirar/<ide>")
+def retirar(ide):
+    equip=Equipamento.query.filter_by(id=ide).first()
+    equip.status=1
+    db.session.add(equip)
+    db.session.commit()
+    Listaequip=Equipamento.query.all()
+    return render_template('retirada.html',equipamentos=Listaequip)
+

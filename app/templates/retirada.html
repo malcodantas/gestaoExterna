@@ -10,11 +10,11 @@
                     <th width='50%'>Usuário:</th>
                 </tr>
                 {% for equipamento in equipamentos %}
-                    {% if equipamento.status==True %}    
+                    {% if equipamento.status==False %}    
                         <tr>
                             <td width='50%'>{{equipamento.name}}</td>
                             <td width='25%'> Usuário</td>
-                            <td width='25%'><a href="/retornou/{{equipamento.id}}">RETORNOU</a></td>                                
+                            <td width='25%'><a href="/retirar/{{equipamento.id}}">RETIRAR</a></td>                                
                         </tr>
                     {% endif %}
                 {% endfor %}

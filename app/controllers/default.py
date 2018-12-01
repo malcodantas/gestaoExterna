@@ -3,6 +3,7 @@ from flask import render_template,redirect,url_for
 from flask_login import login_user,logout_user,login_required,current_user
 from app.models.forms import LoginForm,EquipForm
 from app.models.tables import User,Equipamento
+from werkzeug.security import check_password_hash
 @app.route("/")
 def index():
     return redirect(url_for('login'))
@@ -12,7 +13,7 @@ def login():
     form=LoginForm() 
     if form.validate_on_submit():
         user=User.query.filter_by(username=form.username.data).first()
-        if user and user.password==form.password.data:
+        if user and check_password_hash(user.password,form.password.data):
             login_user(user)
             return redirect(url_for('exibir'))
         else:

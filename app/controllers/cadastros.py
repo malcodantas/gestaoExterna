@@ -2,7 +2,9 @@ from flask import render_template,redirect,flash,url_for
 from flask_login import login_required
 from app import app,db
 from app.models.tables import User,Equipamento,Funcionario
-from app.models.forms import EquipForm,FuncionariosForm
+from app.models.forms import EquipForm,FuncionariosForm,LoginForm
+from werkzeug.security import generate_password_hash
+
 @app.route("/cadastrar_usuario",methods=["GET","POST"])
 @login_required
 def cadastrar_usuario():
@@ -24,14 +26,13 @@ def cadastrar_equipamento():
 
 @app.route("/cadastrar_funcionario",methods=["GET","POST"])
 def cadastrar_funcionario():
-    form=FuncionariosForm()
+    form=LoginForm()
     if form.validate_on_submit():
-        if Funcionario.query.filter_by(name=form.name.data).first():
+        if User.query.filter_by(username=form.username.data).first():
             print("Usuário ja existe, tente outro")
         else:
-            print("usuario cadastrado")
-            novo_funcionario=Funcionario(form.name.data,form.funcao.data)
-            db.session.add(novo_funcionario)
+            print("usuario cadastrado")           
+            novo_funcionario=User(form.username.data, generate_password_hash(form.password.data))
+            db.session.add(novo_funcionario)    
             db.session.commit()
-    #return render_template('cadastrar_funcionario.html',formulario=form)
-    return "Função em desenvolvimento"
+    return render_template('cadastrar_funcionario.html',formulario=form)

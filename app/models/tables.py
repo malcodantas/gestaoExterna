@@ -6,10 +6,12 @@ class User(db.Model,UserMixin):
     id = db.Column(db.Integer,primary_key=True)
     username=db.Column(db.String(80), unique=True)
     password=db.Column(db.String(128))
+    pw_hash=''    
 
-    def __init__(self,username,password):
-        self.username=username
+    def __init__(self, username, password):
+        self.username = username
         self.password=password
+        
     def __repr__(self):
         return self.username
 

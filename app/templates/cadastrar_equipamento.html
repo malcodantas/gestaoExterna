@@ -1,5 +1,23 @@
 {% extends "base.html" %}
 {% block content%}
+<div class='container'>
+    <div class="row">
+        <div class="offset-md-3 col-md-6 offset-md-3" >
+        </br> <h2>Registrar Equipamento   </h2></br>
+            <form action="" method="POST">
+                {{ formulario.csrf_token}}
+                <div class='form-group'>
+                    <label>Nome: </label>{{formulario.name(class="form-control")}}  
+                </div>               
+                <div class="form-group">
+                    <label>Descrição (Opcional): </label>{{formulario.descricao(class="form-control")}}
+                </div> 
 
+                <button type='submit' class="btn btn-default">Registrar</button>
+
+            </form>
+        </div>
+    </div>
+</div>
 
 {% endblock %}

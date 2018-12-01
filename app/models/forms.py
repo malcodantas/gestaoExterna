@@ -6,5 +6,5 @@ class LoginForm(FlaskForm):
     password=PasswordField("password",validators=[DataRequired()])
 class EquipForm(FlaskForm):
     name=StringField("name",validators=[DataRequired()])
-    marca=StringField("marca",validators=[DataRequired()])
-    descricao=StringField("descricao")
+    # marca=StringField("marca",validators=[DataRequired()])
+    descricao=TextField("descricao")

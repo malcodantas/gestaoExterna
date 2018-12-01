@@ -19,7 +19,7 @@ class Equipamento(db.Model):
     name=db.Column(db.String(80))
     status=db.Column(db.Boolean)
     descricao=db.Column(db.String(200))
-    def __init__(self,name,status,descricao):
+    def __init__(self,name,status=False,descricao="Item sem descrião"):
         self.name=name
         self.status=status
         self.descricao=descricao

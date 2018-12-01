@@ -1,9 +1,9 @@
-from app import app
+from app import app,db
 from flask import render_template,redirect,url_for
-from flask_login import login_user,logout_user,login_required
+from flask_login import login_user,logout_user,login_required,current_user
 
-from app.models.forms import LoginForm
-from app.models.tables import User
+from app.models.forms import LoginForm,EquipForm
+from app.models.tables import User,Equipamento
 @app.route("/")
 def index():
     return redirect(url_for('login'))
@@ -33,9 +33,15 @@ def cadastrar_usuario():
     return "cadastrar usuario"
     #render_template('cadastrar_usuario.html')
  
-@app.route("/cadastrar_equipamento")
+@app.route("/cadastrar_equipamento",methods=['POST','GET'])
 def cadastrar_equipamento():
-    return "cadastro de equipamento"
+    form=EquipForm()
+    if form.validate_on_submit():
+        new_equip=Equipamento(form.name.data,False,form.descricao.data)
+        db.session.add(new_equip)
+        db.session.commit()
+        return "Retornar lista de equipamentos"
+    return render_template('cadastrar_equipamento.html',formulario=form)
 ################################################
 @app.route("/retirada")
 def emprestar():

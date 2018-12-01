@@ -3,12 +3,14 @@
 <div class="container">
     <div class="row">
         <div class="offser-3 col-md-6 offset-3">
-            <table>
-
-                <tr>
-                    <th width='50%'>Equipamento:</th>
-                    <th width='50%'>Usuário:</th>
-                </tr>
+                <table class="table">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th width='50%'>Equipamento:</th>
+                                <th width='25%'>Usuário:</th>
+                                <th width='25%'></th>
+                            </tr>
+                        </thead>
                 {% for equipamento in equipamentos %}
                     {% if equipamento.status==False %}    
                         <tr>

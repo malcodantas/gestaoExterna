@@ -3,6 +3,8 @@
 <div class="container">
     <div class="row">
         <div class="offser-3 col-md-6 offset-3 jumbotron">
+            <form action="" method="POST">
+                {{form.csrf_token}}
                 <table class="table  ">
                         <thead class="thead-dark ">
                             <tr>
@@ -14,15 +16,15 @@
                 {% for equipamento in equipamentos %}
                     {% if equipamento.status==False %}    
                         <tr>
-                            <td width='50%'>{{equipamento.name}}</td>
+                            <td width='50%'><input type="checkbox" value="{{equipamento.id}}" name="listaDeEquipamentos"> {{equipamento.name}}</td>
                             <td width='25%'> Usuário</td>
-                            <td width='25%'><a href="/retirar/{{equipamento.id}}">RETIRAR</a></td>                                
+                            <td width='25%'>RETIRAR</td>                                
                         </tr>
                     {% endif %}
                 {% endfor %}
+                <button type="submit btn-default btn">RETIRAR</button>
 
-
-
+            </form>
 
 
             </table>        

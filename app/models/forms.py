@@ -8,3 +8,5 @@ class EquipForm(FlaskForm):
     name=StringField("name",validators=[DataRequired()])
     # marca=StringField("marca",validators=[DataRequired()])
     descricao=TextField("descricao")
+class ChBox(FlaskForm):
+    pass

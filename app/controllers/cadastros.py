@@ -25,6 +25,7 @@ def cadastrar_equipamento():
 
 
 @app.route("/cadastrar_funcionario",methods=["GET","POST"])
+@login_required
 def cadastrar_funcionario():
     form=LoginForm()
     if form.validate_on_submit():

@@ -6,7 +6,7 @@ from app.models.tables import User,Equipamento
 from werkzeug.security import check_password_hash
 @app.route("/")
 def index():
-    return redirect(url_for('login'))
+    return redirect(url_for('exibir'))
 
 @app.route("/login",methods=['POST','GET'])
 def login():
@@ -24,7 +24,7 @@ def login():
 @login_required
 def logout():
     logout_user()
-    return redirect('login')
+    return redirect(url_for('exibir'))
 
 ################################################
 # Gerenciamento do cadastro de equipamentos e usuários

@@ -31,7 +31,9 @@
           <li class="nav-item">
             {% if current_user.is_authenticated %}
                <a class="nav-link " style="color:red" href="/logout"><b>Sair</b></a>
-            {% endif %}
+             {% else %}
+             <a class="nav-link " style="color:rgb(68, 151, 21)" href="/login"><b>Login</b></a>
+             {% endif %}
           </li>
           <li class="nav-item">
             <a class="nav-link " href="/externa">Externa</a>
